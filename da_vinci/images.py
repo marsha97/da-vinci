@@ -92,7 +92,10 @@ class Image(object):
         """Generates a suitable filename based on image name and format."""
         name = self.filename or self.name
         filename, extension = os.path.splitext(name)
-        return '%s.%s' % (filename, formats.EXTENSIONS[self.format])
+        try:
+            return '%s.%s' % (filename, formats.EXTENSIONS[self.format])
+        except KeyError:
+            return name
 
     def show(self):
         """Displays the image, mainly for debugging purposes.
